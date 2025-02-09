@@ -13,15 +13,24 @@ def find_json_file(folder):
     return None
 
 def extract_acc_norm_values(json_path):
-    """Extract acc_norm,none values from the JSON results field"""
+    """Extract acc_norm,none, *_acc,none, and exact_match,none values from the JSON results field"""
     with open(json_path, "r") as f:
         data = json.load(f)
     
     results = {}
     if "results" in data:
         for task, task_data in data["results"].items():
-            if isinstance(task_data, dict) and "acc_norm,none" in task_data:
-                results[task] = task_data["acc_norm,none"]
+            if isinstance(task_data, dict):
+                # Check for acc_norm,none
+                if "acc_norm,none" in task_data:
+                    results[task] = task_data["acc_norm,none"]
+                # Check for *_acc,none
+                for key in task_data:
+                    if key.endswith("_acc,none"):
+                        results[f"{task}_{key}"] = task_data[key]
+                # Check for exact_match,none
+                if "exact_match,none" in task_data:
+                    results[f"{task}_exact_match,none"] = task_data["exact_match,none"]
     
     return results
 
