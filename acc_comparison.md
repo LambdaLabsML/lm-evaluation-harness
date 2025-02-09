@@ -1,44 +1,44 @@
-| task_name                                                   | deepseek8b   | deepseek8b_david_20250205   |
-|:------------------------------------------------------------|:-------------|:----------------------------|
-| leaderboard_bbh_boolean_expressions                         | 0.46         | **0.556**                   |
-| leaderboard_bbh_causal_judgement                            | **0.519**    | **0.519**                   |
-| leaderboard_bbh_date_understanding                          | **0.384**    | 0.38                        |
-| leaderboard_bbh_disambiguation_qa                           | 0.3          | **0.312**                   |
-| leaderboard_bbh_formal_fallacies                            | **0.468**    | **0.468**                   |
-| leaderboard_bbh_geometric_shapes                            | **0.084**    | 0.076                       |
-| leaderboard_bbh_hyperbaton                                  | 0.46         | **0.524**                   |
-| leaderboard_bbh_logical_deduction_five_objects              | **0.248**    | 0.192                       |
-| leaderboard_bbh_logical_deduction_seven_objects             | **0.192**    | 0.148                       |
-| leaderboard_bbh_logical_deduction_three_objects             | **0.344**    | 0.32                        |
-| leaderboard_bbh_movie_recommendation                        | **0.308**    | 0.3                         |
-| leaderboard_bbh_navigate                                    | **0.42**     | **0.42**                    |
-| leaderboard_bbh_object_counting                             | 0.072        | **0.332**                   |
-| leaderboard_bbh_penguins_in_a_table                         | **0.226**    | 0.212                       |
-| leaderboard_bbh_reasoning_about_colored_objects             | **0.252**    | 0.192                       |
-| leaderboard_bbh_ruin_names                                  | **0.364**    | 0.292                       |
-| leaderboard_bbh_salient_translation_error_detection         | **0.284**    | 0.18                        |
-| leaderboard_bbh_snarks                                      | **0.517**    | 0.494                       |
-| leaderboard_bbh_sports_understanding                        | **0.46**     | **0.46**                    |
-| leaderboard_bbh_temporal_sequences                          | 0.276        | **0.284**                   |
-| leaderboard_bbh_tracking_shuffled_objects_five_objects      | **0.208**    | 0.204                       |
-| leaderboard_bbh_tracking_shuffled_objects_seven_objects     | **0.152**    | 0.148                       |
-| leaderboard_bbh_tracking_shuffled_objects_three_objects     | **0.332**    | 0.316                       |
-| leaderboard_bbh_web_of_lies                                 | **0.488**    | **0.488**                   |
-| leaderboard_gpqa_diamond                                    | **0.298**    | 0.187                       |
-| leaderboard_gpqa_extended                                   | 0.245        | **0.253**                   |
-| leaderboard_gpqa_main                                       | 0.259        | **0.281**                   |
-| leaderboard_ifeval_inst_level_loose_acc,none                | **0.469**    | 0.402                       |
-| leaderboard_ifeval_inst_level_strict_acc,none               | **0.462**    | 0.382                       |
-| leaderboard_ifeval_prompt_level_loose_acc,none              | **0.32**     | 0.264                       |
-| leaderboard_ifeval_prompt_level_strict_acc,none             | **0.312**    | 0.244                       |
-| leaderboard_math_algebra_hard_exact_match,none              | 0.003        | **0.16**                    |
-| leaderboard_math_counting_and_prob_hard_exact_match,none    | 0.0          | **0.08**                    |
-| leaderboard_math_geometry_hard_exact_match,none             | 0.0          | **0.04**                    |
-| leaderboard_math_intermediate_algebra_hard_exact_match,none | 0.002        | **0.038**                   |
-| leaderboard_math_num_theory_hard_exact_match,none           | 0.0          | **0.074**                   |
-| leaderboard_math_prealgebra_hard_exact_match,none           | 0.002        | **0.197**                   |
-| leaderboard_math_precalculus_hard_exact_match,none          | 0.0          | **0.057**                   |
-| leaderboard_mmlu_pro_acc,none                               | **0.206**    | 0.146                       |
-| leaderboard_musr_murder_mysteries                           | **0.5**      | 0.496                       |
-| leaderboard_musr_object_placements                          | 0.207        | **0.227**                   |
-| leaderboard_musr_team_allocation                            | 0.272        | **0.276**                   |
+| task_name                                                   | deepseek8b   | deepseek8b_david_20250205   | llama3_1_8b_instruct   | deepseek70b   |
+|:------------------------------------------------------------|:-------------|:----------------------------|:-----------------------|:--------------|
+| leaderboard_bbh_boolean_expressions                         | 0.46         | 0.556                       | **0.82**               | 0.46          |
+| leaderboard_bbh_causal_judgement                            | 0.519        | 0.519                       | **0.561**              | 0.519         |
+| leaderboard_bbh_date_understanding                          | 0.384        | 0.38                        | **0.496**              | 0.3           |
+| leaderboard_bbh_disambiguation_qa                           | 0.3          | 0.312                       | **0.576**              | 0.312         |
+| leaderboard_bbh_formal_fallacies                            | 0.468        | 0.468                       | **0.536**              | 0.468         |
+| leaderboard_bbh_geometric_shapes                            | 0.084        | 0.076                       | **0.288**              | 0.112         |
+| leaderboard_bbh_hyperbaton                                  | 0.46         | 0.524                       | **0.656**              | 0.484         |
+| leaderboard_bbh_logical_deduction_five_objects              | 0.248        | 0.192                       | **0.388**              | 0.192         |
+| leaderboard_bbh_logical_deduction_seven_objects             | 0.192        | 0.148                       | **0.388**              | 0.152         |
+| leaderboard_bbh_logical_deduction_three_objects             | 0.344        | 0.32                        | **0.616**              | 0.32          |
+| leaderboard_bbh_movie_recommendation                        | 0.308        | 0.3                         | **0.512**              | 0.368         |
+| leaderboard_bbh_navigate                                    | 0.42         | 0.42                        | **0.596**              | 0.42          |
+| leaderboard_bbh_object_counting                             | 0.072        | **0.332**                   | **0.332**              | 0.092         |
+| leaderboard_bbh_penguins_in_a_table                         | 0.226        | 0.212                       | **0.466**              | 0.233         |
+| leaderboard_bbh_reasoning_about_colored_objects             | 0.252        | 0.192                       | **0.66**               | 0.164         |
+| leaderboard_bbh_ruin_names                                  | 0.364        | 0.292                       | **0.612**              | 0.284         |
+| leaderboard_bbh_salient_translation_error_detection         | 0.284        | 0.18                        | **0.536**              | 0.276         |
+| leaderboard_bbh_snarks                                      | 0.517        | 0.494                       | **0.618**              | 0.461         |
+| leaderboard_bbh_sports_understanding                        | 0.46         | 0.46                        | **0.744**              | 0.46          |
+| leaderboard_bbh_temporal_sequences                          | 0.276        | 0.284                       | 0.444                  | **0.464**     |
+| leaderboard_bbh_tracking_shuffled_objects_five_objects      | 0.208        | 0.204                       | **0.244**              | 0.2           |
+| leaderboard_bbh_tracking_shuffled_objects_seven_objects     | 0.152        | 0.148                       | **0.256**              | 0.144         |
+| leaderboard_bbh_tracking_shuffled_objects_three_objects     | 0.332        | 0.316                       | **0.376**              | 0.316         |
+| leaderboard_bbh_web_of_lies                                 | **0.488**    | **0.488**                   | 0.464                  | **0.488**     |
+| leaderboard_gpqa_diamond                                    | **0.298**    | 0.187                       | 0.212                  | 0.237         |
+| leaderboard_gpqa_extended                                   | 0.245        | 0.253                       | **0.297**              | 0.289         |
+| leaderboard_gpqa_main                                       | 0.259        | 0.281                       | **0.304**              | 0.286         |
+| leaderboard_ifeval_inst_level_loose_acc,none                | 0.469        | 0.402                       | **0.85**               | 0.532         |
+| leaderboard_ifeval_inst_level_strict_acc,none               | 0.462        | 0.382                       | **0.821**              | 0.505         |
+| leaderboard_ifeval_prompt_level_loose_acc,none              | 0.32         | 0.264                       | **0.789**              | 0.394         |
+| leaderboard_ifeval_prompt_level_strict_acc,none             | 0.312        | 0.244                       | **0.745**              | 0.366         |
+| leaderboard_math_algebra_hard_exact_match,none              | 0.003        | 0.16                        | **0.645**              | 0.0           |
+| leaderboard_math_counting_and_prob_hard_exact_match,none    | 0.0          | 0.08                        | **0.382**              | 0.0           |
+| leaderboard_math_geometry_hard_exact_match,none             | 0.0          | 0.04                        | **0.357**              | 0.0           |
+| leaderboard_math_intermediate_algebra_hard_exact_match,none | 0.002        | 0.038                       | **0.245**              | 0.0           |
+| leaderboard_math_num_theory_hard_exact_match,none           | 0.0          | 0.074                       | **0.357**              | 0.0           |
+| leaderboard_math_prealgebra_hard_exact_match,none           | 0.002        | 0.197                       | **0.654**              | 0.0           |
+| leaderboard_math_precalculus_hard_exact_match,none          | 0.0          | 0.057                       | **0.291**              | 0.0           |
+| leaderboard_mmlu_pro_acc,none                               | 0.206        | 0.146                       | **0.378**              | 0.123         |
+| leaderboard_musr_murder_mysteries                           | 0.5          | 0.496                       | **0.564**              | 0.496         |
+| leaderboard_musr_object_placements                          | 0.207        | 0.227                       | **0.297**              | 0.23          |
+| leaderboard_musr_team_allocation                            | 0.272        | 0.276                       | 0.308                  | **0.6**       |
