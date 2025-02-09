@@ -24,6 +24,8 @@ def extract_acc_norm_values(json_path):
                 # Check for acc_norm,none
                 if "acc_norm,none" in task_data:
                     results[task] = task_data["acc_norm,none"]
+                if "acc,none" in task_data:
+                    results[f"{task}_acc,none"] = task_data["acc,none"]
                 # Check for *_acc,none
                 for key in task_data:
                     if key.endswith("_acc,none"):
@@ -56,14 +58,14 @@ def process_folders(folders):
 
 def save_results(results_dict, all_tasks, output):
     """Save the extracted values into CSV and markdown files"""
-    # Create DataFrame with tasks in original order
-    df = pd.DataFrame(index=sorted(all_tasks))
+    sorted_tasks = sorted(all_tasks)
+    df = pd.DataFrame(index=sorted_tasks)
     df.index.name = "task_name"
     
     # Add data for each folder while preserving task order
     for folder, results in results_dict.items():
         folder_name = os.path.basename(folder)
-        df[folder_name] = [results.get(task, "N/A") for task in all_tasks]
+        df[folder_name] = [results.get(task, "N/A") for task in sorted_tasks]
     
     # Reset index to make task_name a column
     df = df.reset_index()
