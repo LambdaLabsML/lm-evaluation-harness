@@ -1,7 +1,7 @@
 .DS_Store
 env
 *.pyc
-output/
+#output/
 data/
 lm_cache
 .idea

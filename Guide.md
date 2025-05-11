@@ -8,8 +8,8 @@
 | Method       | Qwen3-30B-A3B | Qwen3-235B-A22B |
 |--------------|----------:|-----------:|
 | Reference    |      65.8 |       n/a |
-| Reproduction |      63.1 |      68.7 |
-| Chattiness    |  6986.30 |   8376.46 |
+| Reproduction |      64.1 |      70.7 |
+| Chattiness    |  7471.88 |   8025.15 |
 
 
 * Chattiness is the averaged number of tokens generated for a single problem.
