@@ -28,7 +28,7 @@ sudo docker run --rm -it  --gpus all   \
 vllm/vllm-openai:latest
 
 cd /lm-evaluation-harness
-sed -i '/vllm/d' /SkyThought/pyproject.toml
+sed -i '/vllm/d' pyproject.toml
 
 pip install -e .
 ```
