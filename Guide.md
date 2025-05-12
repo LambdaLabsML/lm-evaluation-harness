@@ -12,7 +12,7 @@
 | Chattiness    |  7471.88 |   8025.15 | 754.14 | 868.19 |
 
 
-* Chattiness is the averaged number of tokens generated for a single problem.
+* Chattiness is the average number of tokens generated for a single problem.
 * Raw outputs can be found in the `./ouptut` folder.
 
 
