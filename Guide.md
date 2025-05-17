@@ -91,8 +91,10 @@ lm_eval \
 python compute_token.py \
 ./output/gpqa_diamond_cot_zeroshot/Llama-4-Maverick-17B-128E-Instruct-FP8/meta-llama__Llama-4-Maverick-17B-128E-Instruct-FP8/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
 meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
+```
 
 ## DeepSeek-R1-Distill-Llama-70B
+```
 lm_eval \
 --model vllm \
 --model_args pretrained=deepseek-ai/DeepSeek-R1-Distill-Llama-70B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_prefix_caching=True \
