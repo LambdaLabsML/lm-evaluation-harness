@@ -5,11 +5,11 @@
 
 ### GPQA-Diamond
 
-| Method       | Qwen3-30B-A3B | Qwen3-235B-A22B | Llama-4-Scout-17B-16E-Instruct | Llama-4-Maverick-17B-128E-Instruct-FP8 |
-|--------------|----------:|-----------:|-----------:|-----------:|
-| Reference    |      65.8 |       n/a | 57.2 | 69.8 |
-| Reproduction |      64.1±3.4 |      70.7±3.3 | 55.1±3.5 | 66.2±3.4 |
-| Chattiness    |  7471.88 |   8025.15 | 754.14 | 868.19 |
+| Method       | Qwen3-30B-A3B | Qwen3-235B-A22B | Llama-4-Scout-17B-16E-Instruct | Llama-4-Maverick-17B-128E-Instruct-FP8 | DeepSeek-R1-Distill-Llama-70B |
+|--------------|----------:|-----------:|-----------:|-----------:|-----------:|
+| Reference    |      65.8 |       n/a | 57.2 | 69.8 | 65.2 |
+| Reproduction |      64.1±3.4 |  70.7±3.3 | 55.1±3.5 | 66.2±3.4 | 63.6±3.4 |
+| Chattiness    |  7471.88 |   8025.15 | 754.14 | 868.19 | 5273.24 |
 
 
 * Chattiness is the averaged number of tokens generated for a single problem.
@@ -91,5 +91,19 @@ lm_eval \
 python compute_token.py \
 ./output/gpqa_diamond_cot_zeroshot/Llama-4-Maverick-17B-128E-Instruct-FP8/meta-llama__Llama-4-Maverick-17B-128E-Instruct-FP8/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
 meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
+
+## DeepSeek-R1-Distill-Llama-70B
+lm_eval \
+--model vllm \
+--model_args pretrained=deepseek-ai/DeepSeek-R1-Distill-Llama-70B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_prefix_caching=True \
+--gen_kwargs '{"max_gen_toks":32768,"until":["<｜end▁of▁sentence｜>"],"temperature":0.0}' \
+--tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
+--output_path output/gpqa_diamond_cot_zeroshot/DeepSeek-R1-Distill-Llama-70B \
+--log_samples --write_out
+
+
+python compute_token.py \
+./output/gpqa_diamond_cot_zeroshot/DeepSeek-R1-Distill-Llama-70B/deepseek-ai__DeepSeek-R1-Distill-Llama-70B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+deepseek-ai/DeepSeek-R1-Distill-Llama-70B
 
 ```

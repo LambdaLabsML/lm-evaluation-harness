@@ -12,7 +12,7 @@ filter_list:
   - name: "strict-match"
     filter:
       - function: "regex"
-        regex_pattern: '(?<=\\boxed\{)[A-D](?=\})|(?<=\\boxed\{\\text\{)[A-D](?=\}\})'
+        regex_pattern: '(?<=\\boxed\{)[A-D](?=\})|(?<=\\boxed\{\\text\{)[A-D](?=\}\})|(?i:(?<=Answer: )[A-D]|(?<=Answer: \()[A-D](?=\))|(?<=Final Answer: \()[A-D](?=\))|(?<=\*\*Answer: )[A-D](?=\*\*)|(?<=\*\*Answer:\*\* \()[A-D](?=\))|(?<=\*\*Final Answer: \()[A-D])'
       - function: "take_first"
   - name: "flexible-extract"
     filter:
