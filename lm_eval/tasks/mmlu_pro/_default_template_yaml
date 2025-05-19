@@ -12,8 +12,9 @@ filter_list:
   - name: "custom-extract"
     filter:
       - function: "regex"
-        regex_pattern: 'answer is \(?([ABCDEFGHIJ])\)?'
+        # regex_pattern: 'answer is \(?([ABCDEFGHIJ])\)?'
         # regex_pattern: r".*[aA]nswer:\s*([A-J])",
+        regex_pattern: '(?i)(?:FINAL ANSWER: |The best answer is |Answer\s*:|Answer\s*:​​​​​​|উত্তর\s*:|उत्तर\s*:|উত্তরঃ|উত্তর\s*:|Antwort\s*:|답변\s*:|정답\s*:|답\s*:|答案\s*：|答案\s*:|答\s*：|答\s*:|答复\s*：|答曰\s*：|الإجابة:|الجواب:|إجابة:|الإجابة النهائية:|الإجابة الصحيحة:|الإجابة الصحيحة هي:|الإجابة هي:|Respuesta\s*:|Risposta\s*:|答え\s*:|答え\s*：|回答\s*:|回答\s*：|解答\s*:|Jawaban\s*:|Réponse\s*:|Resposta\s*:|Jibu\s*:|Idahun\s*:|Ìdáhùn\s*:|Idáhùn\s*:|Àmọ̀nà\s*:|Àdáhùn\s*:|Ànúgọ\s*:|Àṣàyàn\s*:)\s*\(?([A-J]|[أ-د]|[অ]|[ব]|[ড]|[ঢ]|[Ａ]|[Ｂ]|[Ｃ]|[Ｄ])\)?'
       - function: "take_first"
 generation_kwargs:
   until:

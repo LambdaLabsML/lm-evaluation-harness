@@ -81,7 +81,6 @@ sentencepiece = ["sentencepiece>=0.1.98"]
 sparseml = ["sparseml-nightly[llm]>=1.8.0.20240404"]
 sparsify = ["sparsify"]
 testing = ["pytest", "pytest-cov", "pytest-xdist"]
-vllm = ["vllm>=0.4.2"]
 wandb = ["wandb>=0.16.3", "pandas", "numpy"]
 zeno = ["pandas", "zeno-client"]
 all = [
@@ -109,7 +108,6 @@ all = [
     "lm_eval[sparseml]",
     "lm_eval[sparsify]",
     "lm_eval[testing]",
-    "lm_eval[vllm]",
     "lm_eval[wandb]",
     "lm_eval[zeno]",
 ]

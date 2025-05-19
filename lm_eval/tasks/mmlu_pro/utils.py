@@ -1,42 +1,39 @@
 from functools import partial
+from jinja2 import Template
+
+# ­A–P (expand / shrink as you like – letters ≥ #options are ignored)
+choices = [chr(i) for i in range(ord("A"), ord("P") + 1)]
+
+COT_CHAT_PROMPT_TEMPLATE = """\
+Given the following question and candidate answers, choose the best answer.
+Question: {{ question }}
+{{ combined_choices_str }}
+Your response should end with "The best answer is [the_answer_letter]." where the [the_answer_letter] is a letter from the provided choices.
+
+Let's think step by step.
+"""
+
+_prompt_tmpl = Template(COT_CHAT_PROMPT_TEMPLATE)
 
 
-choices = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-]
+def _options_to_str(opts):
+    """Convert list of options → 'A. foo\\nB. bar …'."""
+    return "\n".join(f"{choices[i]}. {opt}" for i, opt in enumerate(opts))
 
 
-def format_cot_example(example, including_answer=True):
-    prompt = "Question:\n"
-    question = example["question"]
-    options = example["options"]
-    prompt += question + "\n"
-    prompt += "Options:\n"
-    for i, opt in enumerate(options):
-        prompt += "{}. {}\n".format(choices[i], opt)
+def format_cot_example(example, including_answer: bool = True) -> str:
+    prompt = _prompt_tmpl.render(
+        question=example["question"],
+        combined_choices_str=_options_to_str(example["options"]),
+    )
+
     if including_answer:
-        cot_content = example["cot_content"].replace(
-            "A: Let's think step by step.", "Answer: Let's think step by step."
-        )
-        prompt += cot_content + "\n\n"
-    else:
-        prompt += "Answer: Let's think step by step."
+        cot_content = example["cot_content"].rstrip()
+        # Ensure there is exactly one blank line between prompt and CoT
+        prompt = f"{prompt.rstrip()}\n\n{cot_content}\n"
+
     return prompt
+
 
 
 doc_to_text = partial(format_cot_example, including_answer=False)
