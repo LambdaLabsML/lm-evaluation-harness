@@ -5,7 +5,7 @@
 
 ### MMLU-Pro
 
-| Method       | Llama-4-Scout-17B-16E-Instruct | Llama-4-Maverick-17B-128E-Instruct-FP8 | DeepSeek-R1-Distill-Llama-70B |
+| Method       | Llama-4-Scout-17B-16E-Instruct | Llama-4-Maverick-17B-128E-Instruct-FP8 | Llama-3.3-70B |
 |--------------|-----------:|-----------:|-----------:|
 | Reference    | 68.9 | 74.3 | 80.5 |
 | Reproduction | 71.2±0.004 | 73.3±0.003 | 80.2±0.004 |
