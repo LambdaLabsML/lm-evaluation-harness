@@ -7,13 +7,14 @@
 
 | Method       | Qwen3-30B-A3B | Qwen3-235B-A22B | Llama-4-Scout-17B-16E-Instruct | Llama-4-Maverick-17B-128E-Instruct-FP8 | DeepSeek-R1-Distill-Llama-70B |
 |--------------|----------:|-----------:|-----------:|-----------:|-----------:|
-| Reference    |      65.8 |       n/a | 57.2 | 69.8 | 65.2 |
+| Reference    |      65.8 |       n/a | n/a | n/a | 65.2 |
 | Reproduction |      64.1±3.4 |  70.7±3.3 | 55.1±3.5 | 66.2±3.4 | 63.6±3.4 |
 | Chattiness    |  7471.88 |   8025.15 | 754.14 | 868.19 | 5273.24 |
 
 
 * Chattiness is the average number of tokens generated for a single problem.
 * Raw outputs can be found in the `./ouptut` folder.
+* Meta [reported](https://github.com/meta-llama/llama-stack-evals/blob/main/BENCHMARKS_REPORT.md) zero-shot scores of `57.2` for `Llama-4-Scout-17B-16E-Instruct-FP8` and `69.8` for `Llama-4-Maverick-17B-128E-Instruct-FP8`. Our lm-harness 5-shot evaluations yield results within a `5%` margin of those figures.
 
 
 ## Setup
