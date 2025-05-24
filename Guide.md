@@ -15,7 +15,7 @@
 * Standard scores are produced with `temperature=0`. 
 * Qwen3 and DeepSeek's optimized scores are produced with `temperature=0.6`.
 * Llama4's optimizezd scores are produced with customized prompts from [llama-stack-evals](https://github.com/meta-llama/llama-stack-evals).
-* We exclude Qwen3 [reported](https://arxiv.org/pdf/2505.09388)'s reference scores from this table because they were produced using 5-shot instead of zero-shot.
+* We exclude Qwen3's [reference scores](https://arxiv.org/pdf/2505.09388) from this table because they were produced using 5-shot instead of zero-shot.
 * Chattiness is the average number of tokens generated for a single problem.
 * Raw outputs can be found in the `./ouptut` folder.
 
