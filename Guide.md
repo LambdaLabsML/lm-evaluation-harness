@@ -3,18 +3,21 @@
 
 ## Results
 
-### GPQA-Diamond
+### GPQA-Diamond zeroshot CoT
 
 | Method       | Qwen3-30B-A3B | Qwen3-235B-A22B | Llama-4-Scout-17B-16E-Instruct | Llama-4-Maverick-17B-128E-Instruct-FP8 | DeepSeek-R1-Distill-Llama-70B |
 |--------------|----------:|-----------:|-----------:|-----------:|-----------:|
-| Reference    |      65.8 |       n/a | n/a | n/a | 65.2 |
-| Reproduction |      64.1±3.4 |  70.7±3.3 | 55.1±3.5 | 66.2±3.4 | 63.6±3.4 |
+| Reference    |      n/a |       n/a | 57.2 | 69.8 | 65.2 |
+| Standard |      61.40 |  69.71 | 49.50 | 62.00 | 62.02 |
+| Optimized |      62.42 |  70.91 | 55.3 | 69.89 | 65.56 |
 | Chattiness    |  7471.88 |   8025.15 | 754.14 | 868.19 | 5273.24 |
 
-
+* Standard scores are produced with `temperature=0`. 
+* Qwen3 and DeepSeek's optimized scores are produced with `temperature=0.6`.
+* Llama4's optimizezd scores are produced with customized prompts from [llama-stack-evals](https://github.com/meta-llama/llama-stack-evals).
+* We exclude Qwen3 [reported](https://arxiv.org/pdf/2505.09388)'s reference scores from this table because they were produced using 5-shot instead of zero-shot.
 * Chattiness is the average number of tokens generated for a single problem.
 * Raw outputs can be found in the `./ouptut` folder.
-* Meta [reported](https://github.com/meta-llama/llama-stack-evals/blob/main/BENCHMARKS_REPORT.md) zero-shot scores of `57.2` for `Llama-4-Scout-17B-16E-Instruct-FP8` and `69.8` for `Llama-4-Maverick-17B-128E-Instruct-FP8`. Our lm-harness 5-shot evaluations yield results within a `5%` margin of those figures.
 
 
 ## Setup
@@ -38,18 +41,18 @@ pip install -e .
 ## Qwen3
 
 ```
-# Notice enable_thinking=True is needed for lm-harness to use the thinking mode of Qwen
+# Standard
 
 lm_eval \
 --model vllm \
 --model_args pretrained=Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_thinking=True,enable_prefix_caching=True \
 --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.0}' \
 --tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
---output_path output/gpqa_diamond_cot_zeroshot/Qwen3-30B-A3B \
+--output_path output/output_standard/Qwen3-30B-A3B \
 --log_samples --write_out
 
 python compute_token.py \
-./output/gpqa_diamond_cot_zeroshot/Qwen3-30B-A3B/Qwen__Qwen3-30B-A3B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+./output/output_standard/Qwen3-30B-A3B/Qwen__Qwen3-30B-A3B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
 Qwen/Qwen3-235B-A22B
 
 lm_eval \
@@ -57,26 +60,56 @@ lm_eval \
 --model_args pretrained=Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_thinking=True,enable_prefix_caching=True \
 --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.0}' \
 --tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
---output_path output/gpqa_diamond_cot_zeroshot/Qwen3-235B-A22B \
+--output_path output/output_standard/Qwen3-235B-A22B \
 --log_samples --write_out
 
 python compute_token.py \
-./output/gpqa_diamond_cot_zeroshot/Qwen3-30B-A3B/Qwen__Qwen3-30B-A3B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+./output/output_standard/Qwen3-30B-A3B/Qwen__Qwen3-30B-A3B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
 Qwen/Qwen3-235B-A22B
+
+
+# Optimized
+lm_eval \
+--model vllm \
+--model_args pretrained=Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_thinking=True,enable_prefix_caching=True \
+--gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_p":0.95,"top_k":20}' \
+--tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
+--output_path output/output_optimized/Qwen3-30B-A3B \
+--log_samples --write_out
+
+
+python compute_token.py \
+./output/output_optimized/Qwen3-30B-A3B/Qwen__Qwen3-30B-A3B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+Qwen/Qwen3-235B-A22B
+
+lm_eval \
+--model vllm \
+--model_args pretrained=Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_thinking=True,enable_prefix_caching=True \
+--gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_p":0.95,"top_k":20}' \
+--tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
+--output_path output/output_optimized/Qwen3-235B-A22B \
+--log_samples --write_out
+
+python compute_token.py \
+./output/output_optimized/Qwen3-30B-A3B/Qwen__Qwen3-30B-A3B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+Qwen/Qwen3-235B-A22B
+
 ```
+
 
 ## Llama 4
 ```
+# Standard
 lm_eval \
 --model vllm \
 --model_args pretrained=meta-llama/Llama-4-Scout-17B-16E-Instruct,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_prefix_caching=True \
 --gen_kwargs '{"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}' \
 --tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
---output_path output/gpqa_diamond_cot_zeroshot/Llama-4-Scout-17B-16E-Instruct \
+--output_path output/output_standard/Llama-4-Scout-17B-16E-Instruct \
 --log_samples --write_out
 
 python compute_token.py \
-./output/gpqa_diamond_cot_zeroshot/Llama-4-Scout-17B-16E-Instruct/meta-llama__Llama-4-Scout-17B-16E-Instruct/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+./output/output_standard/Llama-4-Scout-17B-16E-Instruct/meta-llama__Llama-4-Scout-17B-16E-Instruct/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
 meta-llama/Llama-4-Scout-17B-16E-Instruct
 
 
@@ -85,30 +118,46 @@ lm_eval \
 --model_args pretrained=meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_prefix_caching=True \
 --gen_kwargs '{"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}' \
 --tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
---output_path output/gpqa_diamond_cot_zeroshot/Llama-4-Maverick-17B-128E-Instruct-FP8 \
+--output_path output/output_standard/Llama-4-Maverick-17B-128E-Instruct-FP8 \
 --log_samples --write_out 
 
 
 python compute_token.py \
-./output/gpqa_diamond_cot_zeroshot/Llama-4-Maverick-17B-128E-Instruct-FP8/meta-llama__Llama-4-Maverick-17B-128E-Instruct-FP8/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+./output/output_standard/Llama-4-Maverick-17B-128E-Instruct-FP8/meta-llama__Llama-4-Maverick-17B-128E-Instruct-FP8/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
 meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
+
+
+# Optimized
+# Llama4's optimized results were produced using https://github.com/meta-llama/llama-stack-evals
 ```
 
 ## DeepSeek-R1-Distill-Llama-70B
 ```
+# Standard
 lm_eval \
 --model vllm \
 --model_args pretrained=deepseek-ai/DeepSeek-R1-Distill-Llama-70B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_prefix_caching=True \
 --gen_kwargs '{"max_gen_toks":32768,"until":["<｜end▁of▁sentence｜>"],"temperature":0.0}' \
 --tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
---output_path output/gpqa_diamond_cot_zeroshot/DeepSeek-R1-Distill-Llama-70B \
+--output_path output/output_standard/DeepSeek-R1-Distill-Llama-70B \
 --log_samples --write_out
 
-
 python compute_token.py \
-./output/gpqa_diamond_cot_zeroshot/DeepSeek-R1-Distill-Llama-70B/deepseek-ai__DeepSeek-R1-Distill-Llama-70B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+./output/output_standard/DeepSeek-R1-Distill-Llama-70B/deepseek-ai__DeepSeek-R1-Distill-Llama-70B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
 deepseek-ai/DeepSeek-R1-Distill-Llama-70B
 
+# Optimized
+lm_eval \
+--model vllm \
+--model_args pretrained=deepseek-ai/DeepSeek-R1-Distill-Llama-70B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,enable_prefix_caching=True \
+--gen_kwargs '{"max_gen_toks":32768,"until":["<｜end▁of▁sentence｜>"],"temperature":0.6,"top_p":0.95}' \
+--tasks gpqa_diamond_cot_zeroshot --batch_size auto --apply_chat_template \
+--output_path output/output_optimized/DeepSeek-R1-Distill-Llama-70B \
+--log_samples --write_out
+
+python compute_token.py \
+./output/output_optimized/DeepSeek-R1-Distill-Llama-70B/deepseek-ai__DeepSeek-R1-Distill-Llama-70B/samples_gpqa_diamond_cot_zeroshot_<timestamp>.jsonl \
+deepseek-ai/DeepSeek-R1-Distill-Llama-70B
 ```
 
 
