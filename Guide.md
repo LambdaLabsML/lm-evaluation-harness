@@ -129,6 +129,16 @@ meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
 
 # Optimized
 # Llama4's optimized results were produced using https://github.com/meta-llama/llama-stack-evals
+
+uvx llama-stack-evals run-benchmarks \
+--benchmarks gpqa-cot-diamond \
+--provider llama_api \
+--model Llama-4-Scout-17B-16E-Instruct-FP8
+
+uvx llama-stack-evals run-benchmarks \
+--benchmarks gpqa-cot-diamond \
+--provider llama_api \
+--model Llama-4-Maverick-17B-128E-Instruct-FP8
 ```
 
 ## DeepSeek-R1-Distill-Llama-70B
