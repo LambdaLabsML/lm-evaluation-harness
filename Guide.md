@@ -189,24 +189,6 @@ deepseek-ai/DeepSeek-R1-Distill-Llama-70B
 
 #### Setup
 
-**For llama models**:
-```sh
-git clone https://github.com/LambdaLabsML/lm-evaluation-harness.git && cd lm-evaluation-harness && git checkout llama-4
-
-sudo docker run --rm -it  --gpus all   \
--v ~/.cache/huggingface:/root/.cache/huggingface   \
--v ./lm-evaluation-harness:/lm-evaluation-harness   \
---shm-size=512g --ipc=host   \
---entrypoint /bin/bash   \
-vllm/vllm-openai:latest
-
-cd /lm-evaluation-harness
-sed -i '/vllm/d' pyproject.toml
-
-pip install -e .
-```
-
-**For non-llama models**:
 ```sh
 git clone https://github.com/LambdaLabsML/lm-evaluation-harness.git && cd lm-evaluation-harness
 
@@ -224,28 +206,81 @@ pip install -e .
 ```
 
 
-#### Qwen3-30B-A3B 
+#### Qwen3-30B-A3B
+
 ```sh
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-30B-A38 --model_args model=/mnt/models/Qwen/Qwen3-30B-A3B,pretrained=/mnt/models/Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_k":20,"top_p":0.95}' --num_fewshot 1
+# Standardized
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-30B-A38 --model_args model=/mnt/models/Qwen/Qwen3-30B-A3B,pretrained=/mnt/models/Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"]}'
+
+# Optimized
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-30B-A38 --model_args model=/mnt/models/Qwen/Qwen3-30B-A3B,pretrained=/mnt/models/Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_k":20,"top_p":0.95}'
 ```
 
 
-#### Qwen3-235B-A22B 
+#### Qwen3-235B-A22B
+
 ```sh
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-235B-A22B --model_args model=/mnt/models/Qwen/Qwen3-235B-A22B,pretrained=/mnt/models/Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_k":20,"top_p":0.95}' --num_fewshot 1
+# Standardized
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-235B-A22B --model_args model=/mnt/models/Qwen/Qwen3-235B-A22B,pretrained=/mnt/models/Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"]}'
+
+# Optimized
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-235B-A22B --model_args model=/mnt/models/Qwen/Qwen3-235B-A22B,pretrained=/mnt/models/Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_k":20,"top_p":0.95}'
 ```
 
 
-#### Llama-4-Scout-17B-16E-Instruct
+#### Llama-4-Scout-17B-16E-Instruct Standardized
+
 ```sh
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Scout-17B-16E-Instruct --model_args model=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,pretrained=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}
+```
+
+
+#### Llama-4-Maverick-17B-128E-Instruct-FP8 Standardized
+
+```sh
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Maverick-17B-128E-Instruct-FP8 --model_args model=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,pretrained=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}
+```
+
+
+
+#### Llama-4-Scout-17B-16E-Instruct Optimized
+(uses prompt from [llama-stack-evals](https://github.com/meta-llama/llama-stack-evals))
+
+```sh
+git clone https://github.com/LambdaLabsML/lm-evaluation-harness.git && cd lm-evaluation-harness && git checkout llama-4
+
+sudo docker run --rm -it  --gpus all   \
+-v ~/.cache/huggingface:/root/.cache/huggingface   \
+-v ./lm-evaluation-harness:/lm-evaluation-harness   \
+--shm-size=512g --ipc=host   \
+--entrypoint /bin/bash   \
+vllm/vllm-openai:latest
+
+cd /lm-evaluation-harness
+sed -i '/vllm/d' pyproject.toml
+pip install -e .
+
 lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Scout-17B-16E-Instruct --model_args model=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,pretrained=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0} --num_fewshot 1
 ```
 
 
-#### Llama-4-Maverick-17B-128E-Instruct-FP8
+#### Llama-4-Maverick-17B-128E-Instruct-FP8 Optimized
+(uses prompt from [llama-stack-evals](https://github.com/meta-llama/llama-stack-evals))
+
 ```sh
+git clone https://github.com/LambdaLabsML/lm-evaluation-harness.git && cd lm-evaluation-harness && git checkout llama-4
+
+sudo docker run --rm -it  --gpus all   \
+-v ~/.cache/huggingface:/root/.cache/huggingface   \
+-v ./lm-evaluation-harness:/lm-evaluation-harness   \
+--shm-size=512g --ipc=host   \
+--entrypoint /bin/bash   \
+vllm/vllm-openai:latest
+
+cd /lm-evaluation-harness
+sed -i '/vllm/d' pyproject.toml
+pip install -e .
+
 lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Maverick-17B-128E-Instruct-FP8 --model_args model=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,pretrained=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0} --num_fewshot 1
 ```
-
-
 
