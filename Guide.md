@@ -210,7 +210,7 @@ pip install -e .
 
 ```sh
 # Standardized
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-30B-A38 --model_args model=/mnt/models/Qwen/Qwen3-30B-A3B,pretrained=/mnt/models/Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"]}'
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-30B-A38 --model_args model=/mnt/models/Qwen/Qwen3-30B-A3B,pretrained=/mnt/models/Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true
 
 # Optimized
 lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-30B-A38 --model_args model=/mnt/models/Qwen/Qwen3-30B-A3B,pretrained=/mnt/models/Qwen/Qwen3-30B-A3B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_k":20,"top_p":0.95}'
@@ -221,7 +221,7 @@ lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --tas
 
 ```sh
 # Standardized
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-235B-A22B --model_args model=/mnt/models/Qwen/Qwen3-235B-A22B,pretrained=/mnt/models/Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"]}'
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-235B-A22B --model_args model=/mnt/models/Qwen/Qwen3-235B-A22B,pretrained=/mnt/models/Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true
 
 # Optimized
 lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Qwen3-235B-A22B --model_args model=/mnt/models/Qwen/Qwen3-235B-A22B,pretrained=/mnt/models/Qwen/Qwen3-235B-A22B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|im_end|>"],"temperature":0.6,"top_k":20,"top_p":0.95}'
@@ -231,14 +231,14 @@ lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --tas
 #### Llama-4-Scout-17B-16E-Instruct Standardized
 
 ```sh
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Scout-17B-16E-Instruct --model_args model=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,pretrained=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Scout-17B-16E-Instruct --model_args model=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,pretrained=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true
 ```
 
 
 #### Llama-4-Maverick-17B-128E-Instruct-FP8 Standardized
 
 ```sh
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Maverick-17B-128E-Instruct-FP8 --model_args model=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,pretrained=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Maverick-17B-128E-Instruct-FP8 --model_args model=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,pretrained=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true
 ```
 
 
@@ -260,7 +260,7 @@ cd /lm-evaluation-harness
 sed -i '/vllm/d' pyproject.toml
 pip install -e .
 
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Scout-17B-16E-Instruct --model_args model=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,pretrained=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0} --num_fewshot 1
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Scout-17B-16E-Instruct --model_args model=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,pretrained=/mnt/model/meta-llama/Llama-4-Scout-17B-16E-Instruct,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}' --num_fewshot 1
 ```
 
 
@@ -281,6 +281,6 @@ cd /lm-evaluation-harness
 sed -i '/vllm/d' pyproject.toml
 pip install -e .
 
-lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Maverick-17B-128E-Instruct-FP8 --model_args model=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,pretrained=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs {"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0} --num_fewshot 1
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/Llama-4-Maverick-17B-128E-Instruct-FP8 --model_args model=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,pretrained=/mnt/model/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true --gen_kwargs '{"max_gen_toks":32768,"until":["<|eot|>"],"temperature":0.0}' --num_fewshot 1
 ```
 
