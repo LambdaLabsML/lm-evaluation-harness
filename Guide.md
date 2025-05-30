@@ -206,6 +206,16 @@ pip install -e .
 ```
 
 
+#### DeepSeek-R1-Distill-Llama-70B
+
+```sh
+# Standardized
+lm_eval --log_samples --apply_chat_template --batch_size auto --model vllm --task=mmlu_pro --output_path output/mmlu_pro/DeepSeek-R1-Distill-Llama-70B --model_args model=/mnt/models/deepseek-ai/DeepSeek-R1-Distill-Llama-70B,pretrained=/mnt/models/deepseek-ai/DeepSeek-R1-Distill-Llama-70B,tensor_parallel_size=8,max_model_len=32768,gpu_memory_utilization=0.9,trust_remote_code=true,enable_thinking=true
+
+# Optimized
+# N/A
+```
+
 #### Qwen3-30B-A3B
 
 ```sh
